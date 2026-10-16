@@ -1,0 +1,16 @@
+name: dm_project
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.12
+  - ipywidgets
+  - jupyter
+  - jupyterlab
+  - matplotlib
+  - numpy
+  - pandas
+  - scikit-learn>=1.7.1
+  - seaborn>=0.13.2
+  - minisom>=2.3.0
+  - ydata-profiling
