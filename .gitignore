@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environments
+.venv/
+venv/
+.env
+
+# Editors (shared project settings in .vscode/settings.json are kept)
+.idea/
+.vscode/*
+!.vscode/settings.json
