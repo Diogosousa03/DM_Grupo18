@@ -58,3 +58,32 @@ def compute_tenure(df):
     df['tenure_months'] = (df['tenure_days'] / 30.4375).round(2)
 
     return df
+
+
+def safe_ratio(num, den):
+    """
+    Divides num by den, handling zero denominators and missing values.
+
+    Rules:
+        num or den missing (NaN)  -> NaN
+        den == 0 and num == 0     -> 0.0 (e.g. no quota and no visits = 0%)
+        den == 0 and num > 0      -> NaN (division by zero is undefined)
+        den > 0                   -> num / den
+
+    Parameters:
+        num -> numerator Series (e.g. df_eda['actual_visits_last_period'])
+        den -> denominator Series (e.g. df_eda['entitled_visits_last_period'])
+
+    Returns:
+        A Series with the result of the division
+        (e.g. df_eda['utilization_rate'] = safe_ratio(actual, entitled)).
+    """
+    conditions = [
+        num.isna() | den.isna(),
+        (den == 0) & (num == 0),
+        (den == 0) & (num > 0),
+        den > 0
+    ]
+    choices = [np.nan, 0.0, np.nan, num / den]
+
+    return pd.Series(np.select(conditions, choices), index=num.index)
