@@ -7,7 +7,7 @@ PLAN_MAP = {
     'private_office': 'Private Office', 'private office': 'Private Office', 'privateoffice': 'Private Office'
 }
 
-# Plan hierarchy, from the lowest to the highest level (used to order plots and tables)
+# Plan hierarchy, from lowest user plan to highest.
 PLAN_ORDER = ['Flex', 'Hot Desk', 'Dedicated Desk', 'Full Time', 'Private Office']
 
 # Ordinal code of each plan (Flex = 1 ... Private Office = 5)
