@@ -7,10 +7,10 @@ PLAN_MAP = {
     'private_office': 'Private Office', 'private office': 'Private Office', 'privateoffice': 'Private Office'
 }
 
-# Plan hierarchy, from lowest user plan to highest.
-PLAN_ORDER = ['Flex', 'Hot Desk', 'Dedicated Desk', 'Full Time', 'Private Office']
+# Plan hierarchy, from lowest user plan to highest (as defined in the project guidelines, section 8.2).
+PLAN_ORDER = ['Hot Desk', 'Flex', 'Dedicated Desk', 'Full Time', 'Private Office']
 
-# Ordinal code of each plan (Flex = 1 ... Private Office = 5)
+# Ordinal code of each plan (Hot Desk = 1 ... Private Office = 5)
 PLAN_CODE = {plan: i for i, plan in enumerate(PLAN_ORDER, start=1)}
 
 #-----------------------------------------------------------------------------------------#
