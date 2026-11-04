@@ -30,10 +30,18 @@ def temp_copy(df, var1, var2):
 
 #-----------------------------------------------------------------------------------------#
 
+# Numeric placeholder codes used in the raw data for "unknown" (not detected by isna())
+PLACEHOLDER_CODES = {
+    'days_since_last_visit': 999,
+}
+
+
 def clean_invalid_values(df, cols):
     """
     Replaces impossible values with NaN (only in the df that is passed, not in the original dataset).
-    Ages < 16 or > 100 also become NaN (if the 'age' column exists).
+    - Negative values in `cols` -> NaN
+    - Placeholder codes (e.g. 999 in days_since_last_visit) -> NaN, if the column is in `cols`
+    - Ages < 16 or > 100 -> NaN (if the 'age' column exists)
     Columns that do not exist in df are ignored.
 
     Parameters:
@@ -46,6 +54,10 @@ def clean_invalid_values(df, cols):
     for col in cols:
         if col in df.columns:
             df.loc[df[col] < 0, col] = np.nan
+
+            # Placeholder codes -> NaN
+            if col in PLACEHOLDER_CODES:
+                df.loc[df[col] == PLACEHOLDER_CODES[col], col] = np.nan
 
     if 'age' in df.columns:
         df.loc[(df['age'] < 16) | (df['age'] > 100), 'age'] = np.nan
