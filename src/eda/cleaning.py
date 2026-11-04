@@ -41,7 +41,7 @@ def clean_invalid_values(df, cols):
     Replaces impossible values with NaN (only in the df that is passed, not in the original dataset).
     - Negative values in `cols` -> NaN
     - Placeholder codes (e.g. 999 in days_since_last_visit) -> NaN, if the column is in `cols`
-    - Ages < 16 or > 100 -> NaN (if the 'age' column exists)
+    - Ages < 18 or > 100 -> NaN (if the 'age' column exists)
     Columns that do not exist in df are ignored.
 
     Parameters:
@@ -60,6 +60,6 @@ def clean_invalid_values(df, cols):
                 df.loc[df[col] == PLACEHOLDER_CODES[col], col] = np.nan
 
     if 'age' in df.columns:
-        df.loc[(df['age'] < 16) | (df['age'] > 100), 'age'] = np.nan
+        df.loc[(df['age'] < 18) | (df['age'] > 100), 'age'] = np.nan
 
     return df
